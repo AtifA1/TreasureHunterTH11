@@ -1,29 +1,41 @@
+import java.awt.Color;
+
 /**
  * The Terrain class is designed to represent the zones between the towns in the Treasure Hunter game.
  * This code has been adapted from Ivan Turner's original program -- thank you Mr. Turner!
  */
-
 public class Terrain {
-    // instance variables
+    // Instance variables
     private String terrainName;
     private String neededItem;
+    private OutputWindow outputWindow;
 
     /**
-     * Sets the class member variables
+     * Sets the class member variables.
      *
      * @param name The name of the zone.
      * @param item The item needed in order to cross the zone.
      */
-    public Terrain(String name, String item) {
+    public Terrain(String name, String item, OutputWindow outputWindow) {
         terrainName = name;
         neededItem = item.toLowerCase();
+        this.outputWindow = outputWindow;
     }
 
-    // accessors
+    /**
+     * Accessor method to get the name of the terrain.
+     *
+     * @return The name of the terrain.
+     */
     public String getTerrainName() {
-        return Colors.CYAN + terrainName + Colors.RESET;
+        return terrainName;
     }
 
+    /**
+     * Accessor method to get the needed item to cross the terrain.
+     *
+     * @return The needed item.
+     */
     public String getNeededItem() {
         return neededItem;
     }
@@ -33,7 +45,7 @@ public class Terrain {
      * Searches the hunter's inventory for the proper item and determines whether the hunter can cross.
      *
      * @param hunter The Hunter object trying to cross the terrain.
-     * @return true if the Hunter has the proper item.
+     * @return True if the Hunter has the proper item.
      */
     public boolean canCrossTerrain(Hunter hunter) {
         if (hunter.hasItemInKit(neededItem)) {
@@ -43,7 +55,9 @@ public class Terrain {
     }
 
     /**
-     * @return A string representation of the terrain and item to cross it.
+     * Returns a string representation of the terrain and item to cross it.
+     *
+     * @return A string representation of the terrain and needed item.
      */
     public String toString() {
         return terrainName + " needs a(n) " + neededItem + " to cross.";
